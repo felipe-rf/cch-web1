@@ -1,5 +1,3 @@
-
-
 // Funções de navegação
 function showSection(sectionId) {
   document.querySelectorAll(".section").forEach((section) => {
@@ -52,7 +50,23 @@ window.onload = function () {
 };
 
 function loadMockData() {
-
+  //Carregar pagina
+  const roomsContainer = document.querySelector(".rooms-grid");
+  roomsContainer.innerHTML = mockData.rooms
+    .slice(0, 3) // Slice to get the first 3 rooms
+    .map(
+      (room) => `
+        <div class="room-card">
+          <img src="${room.image}" alt="${room.name}" class="room-image">
+          <div class="room-content">
+            <h3>${room.name}</h3>
+            <p>${room.description}</p>
+            <a href="/rooms/" class="btn btn-primary">Saiba mais</a>
+          </div>
+        </div>
+      `
+    )
+    .join("");
   // Carregar serviços
   const servicesContainer = document.querySelector("#services .features-grid");
   servicesContainer.innerHTML = mockData.services

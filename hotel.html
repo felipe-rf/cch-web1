@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Luxo</title>
+  <style>
+    /* Reset e estilos base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Header */
+    header {
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: #2563eb;
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #4b5563;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 600px;
+      background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      color: white;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-text {
+      max-width: 600px;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Botões */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .btn-primary {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #1d4ed8;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 4rem 0;
+      background: white;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      text-align: center;
+    }
+
+    .feature-icon {
+      width: 4rem;
+      height: 4rem;
+      background: #dbeafe;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    /* Rooms Section */
+    .rooms {
+      padding: 4rem 0;
+      background: #f3f4f6;
+    }
+
+    .rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .room-card {
+      background: white;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .room-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .room-content {
+      padding: 1.5rem;
+    }
+
+    /* Footer */
+    footer {
+      background: #1f2937;
+      color: white;
+      padding: 2rem 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid #374151;
+      color: #9ca3af;
+    }
+
+    /* Admin Panel */
+    .admin-login {
+      display: none;
+      min-height: 100vh;
+      background: #f3f4f6;
+      padding: 2rem;
+    }
+
+    .login-form {
+      max-width: 400px;
+      margin: 4rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.25rem;
+    }
+
+    .admin-panel {
+      display: none;
+      min-height: 100vh;
+    }
+
+    .admin-sidebar {
+      width: 250px;
+      background: #1f2937;
+      color: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      padding: 1rem;
+    }
+
+    .admin-content {
+      margin-left: 250px;
+      padding: 2rem;
+    }
+
+    .admin-nav {
+      margin-top: 2rem;
+    }
+
+    .admin-nav a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      color: white;
+      text-decoration: none;
+      border-radius: 0.25rem;
+      transition: background-color 0.2s;
+    }
+
+    .admin-nav a:hover {
+      background: #374151;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .admin-content {
+        margin-left: 0;
+      }
+
+      .admin-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s;
+      }
+
+      .admin-sidebar.active {
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Site Principal -->
+  <div id="main-site">
+    <header>
+      <div class="container">
+        <nav>
+          <a href="#" class="logo" onclick="showSection('home')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12h18M3 12l4-8h10l4 8M3 12l4 8h10l4-8"/>
+            </svg>
+            Hotel Luxo
+          </a>
+          <div class="nav-links">
+            <a href="#" onclick="showSection('home')">Início</a>
+            <a href="#" onclick="showSection('rooms')">Quartos</a>
+            <a href="#" onclick="showSection('services')">Serviços</a>
+            <a href="#" onclick="showSection('booking')">Reservas</a>
+            <a href="#" onclick="showSection('location')">Localização</a>
+            <a href="#" onclick="showAdminLogin()">Admin</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Seção Home -->
+    <div id="home" class="section">
+      <div class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-text">
+              <h1>Bem-vindo ao Hotel Luxo</h1>
+              <p>Experimente o conforto e a elegância em sua forma mais pura</p>
+              <a href="#" class="btn btn-primary" onclick="showSection('booking')">Reserve Agora</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="features">
+        <div class="container">
+          <h2 class="section-title">Por que escolher o Hotel Luxo?</h2>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              </div>
+              <h3>5 Estrelas</h3>
+              <p>Serviço de primeira classe e instalações premium</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                  <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                  <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                  <line x1="12" y1="20" x2="12.01" y2="20"/>
+                </svg>
+              </div>
+              <h3>Wi-Fi Gratuito</h3>
+              <p>Internet de alta velocidade em todo o hotel</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M6 5v14"/>
+                  <path d="M18 5v14"/>
+                  <path d="M6 9h12"/>
+                  <path d="M6 15h12"/>
+                </svg>
+              </div>
+              <h3>Academia</h3>
+              <p>Academia moderna com equipamentos de última geração</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+                  <path d="M7 2v20"/>
+                  <path d="M21 15V2"/>
+                  <path d="M18 15h-4a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2z"/>
+                </svg>
+              </div>
+              <h3>Restaurante</h3>
+              <p>Gastronomia internacional de alto padrão</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="rooms">
+        <div class="container">
+          <h2 class="section-title">Nossos Quartos</h2>
+          <div class="rooms-grid">
+            <div class="room-card">
+              <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Quarto Standard" class="room-image">
+              <div class="room-content">
+                <h3>Quarto Standard</h3>
+                <p>Conforto e praticidade para sua estadia</p>
+                <a href="#" class="btn btn-primary" onclick="showSection('rooms')">Saiba mais</a>
+              </div>
+            </div>
+            <div class="room-card">
+              <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Quarto Luxo" class="room-image">
+              <div class="room-content">
+                <h3>Quarto Luxo</h3>
+                <p>Elegância e sofisticação em cada detalhe</p>
+                <a href="#" class="btn btn-primary" onclick="showSection('rooms')">Saiba mais</a>
+              </div>
+            </div>
+            <div class="room-card">
+              <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Suíte Presidencial" class="room-image">
+              <div class="room-content">
+                <h3>Suíte Presidencial</h3>
+                <p>O máximo em luxo e exclusividade</p>
+                <a href="#" class="btn btn-primary" onclick="showSection('rooms')">Saiba mais</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Seção Quartos -->
+    <div id="rooms" class="section" style="display: none;">
+      <div class="container">
+        <h2 class="section-title">Nossos Quartos</h2>
+        <div class="rooms-grid">
+          <!-- Conteúdo detalhado dos quartos será carregado via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção Serviços -->
+    <div id="services" class="section" style="display: none;">
+      <div class="container">
+        <h2 class="section-title">Nossos Serviços</h2>
+        <div class="features-grid">
+          <!-- Conteúdo dos serviços será carregado via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção Reservas -->
+    <div id="booking" class="section" style="display: none;">
+      <div class="container">
+        <h2 class="section-title">Faça sua Reserva</h2>
+        <div class="login-form">
+          <form id="booking-form" onsubmit="handleBooking(event)">
+            <div class="form-group">
+              <label for="checkin">Data de Check-in</label>
+              <input type="date" id="checkin" required>
+            </div>
+            <div class="form-group">
+              <label for="checkout">Data de Check-out</label>
+              <input type="date" id="checkout" required>
+            </div>
+            <div class="form-group">
+              <label for="room-type">Tipo de Quarto</label>
+              <select id="room-type" required>
+                <option value="standard">Quarto Standard</option>
+                <option value="luxo">Quarto Luxo</option>
+                <option value="presidencial">Suíte Presidencial</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="guests">Número de Hóspedes</label>
+              <input type="number" id="guests" min="1" max="4" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Reservar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção Localização -->
+    <div id="location" class="section" style="display: none;">
+      <div class="container">
+        <h2 class="section-title">Nossa Localização</h2>
+        <div style="text-align: center;">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1975993271816!2d-46.65620548502192!3d-23.564611284681276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1647887774745!5m2!1spt-BR!2sbr"
+            width="100%"
+            height="450"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy">
+          </iframe>
+          <div style="margin-top: 2rem;">
+            <h3>Endereço</h3>
+            <p>Av. Paulista, 1000 - São Paulo, SP</p>
+            <p>CEP: 01310-100</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h3>Hotel Luxo</h3>
+            <p>Oferecendo conforto e luxo incomparáveis desde 2000.</p>
+          </div>
+          <div>
+            <h3>Contato</h3>
+            <p>(11) 1234-5678</p>
+            <p>contato@hotelluxo.com.br</p>
+          </div>
+          <div>
+            <h3>Endereço</h3>
+            <p>
+              Av. Paulista, 1000<br>
+              São Paulo - SP<br>
+              CEP: 01310-100
+            </p>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <p>&copy; 2024 Hotel Luxo. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Admin Login -->
+  <div id="admin-login" class="admin-login">
+    <div class="login-form">
+      <h2 style="margin-bottom: 1.5rem;">Login Administrativo</h2>
+      <form id="login-form" onsubmit="handleAdminLogin(event)">
+        <div class="form-group">
+          <label for="username">Usuário</label>
+          <input type="text" id="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div id="admin-panel" class="admin-panel">
+    <div class="admin-sidebar">
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12h18M3 12l4-8h10l4 8M3 12l4 8h10l4-8"/>
+        </svg>
+        Admin Panel
+      </div>
+      <nav class="admin-nav">
+        <a href="#" onclick="showAdminSection('dashboard')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"/>
+            <rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          Dashboard
+        </a>
+        <a href="#" onclick="showAdminSection('manage-rooms')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12h18M3 12l4-8h10l4 8M3 12l4 8h10l4-8"/>
+          </svg>
+          Quartos
+        </a>
+        <a href="#" onclick="showAdminSection('manage-services')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+          Serviços
+        </a>
+        <a href="#" onclick="showAdminSection('manage-bookings')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          Reservas
+        </a>
+        <a href="#" onclick="showAdminSection('manage-photos')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          Fotos
+        </a>
+        <a href="#" onclick="handleLogout()" style="color: #f87171;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          Sair
+        </a>
+      </nav>
+    </div>
+    <div class="admin-content">
+      <div id="dashboard" class="admin-section">
+        <h2>Dashboard</h2>
+        <!-- Conteúdo do dashboard será carregado via JavaScript -->
+      </div>
+      <div id="manage-rooms" class="admin-section" style="display: none;">
+        <h2>Gerenciar Quartos</h2>
+        <!-- Conteúdo de gerenciamento de quartos será carregado via JavaScript -->
+      </div>
+      <div id="manage-services" class="admin-section" style="display: none;">
+        <h2>Gerenciar Serviços</h2>
+        <!-- Conteúdo de gerenciamento de serviços será carregado via JavaScript -->
+      </div>
+      <div id="manage-bookings" class="admin-section" style="display: none;">
+        <h2>Gerenciar Reservas</h2>
+        <!-- Conteúdo de gerenciamento de reservas será carregado via JavaScript -->
+      </div>
+      <div id="manage-photos" class="admin-section" style="display: none;">
+        <h2>Gerenciar Fotos</h2>
+        <!-- Conteúdo de gerenciamento de fotos será carregado via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dados mockados
+    const mockData = {
+      rooms: [
+        {
+          id: 1,
+          type: 'standard',
+          name: 'Quarto Standard',
+          description: 'Conforto e praticidade para sua estadia',
+          price: 250,
+          capacity: 2,
+          image: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+        },
+        {
+          id: 2,
+          type: 'luxo',
+          name: 'Quarto Luxo',
+          description: 'Elegância e sofisticação em cada detalhe',
+          price: 450,
+          capacity: 2,
+          image: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+        },
+        {
+          id: 3,
+          type: 'presidencial',
+          name: 'Suíte Presidencial',
+          description: 'O máximo em luxo e exclusividade',
+          price: 800,
+          capacity: 4,
+          image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+        }
+      ],
+      services: [
+        {
+          id: 1,
+          name: 'Wi-Fi',
+          description: 'Internet de alta velocidade em todo o hotel',
+          price: 0
+        },
+        {
+          id: 2,
+          name: 'Academia',
+          description: 'Academia moderna com equipamentos de última geração',
+          price: 0
+        },
+        {
+          id: 3,
+          name: 'Restaurante',
+          description: 'Gastronomia internacional de alto padrão',
+          price: null
+        },
+        {
+          id: 4,
+          name: 'Lavanderia',
+          description: 'Serviço completo de lavanderia',
+          price: 50
+        }
+      ],
+      bookings: []
+    };
+
+    // Funções de navegação
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.style.display = 'none';
+      });
+      document.getElementById(sectionId).style.display = 'block';
+    }
+
+    function showAdminLogin() {
+      document.getElementById('main-site').style.display = 'none';
+      document.getElementById('admin-login').style.display = 'block';
+      document.getElementById('admin-panel').style.display = 'none';
+    }
+
+    function showAdminPanel() {
+      document.getElementById('main-site').style.display = 'none';
+      document.getElementById('admin-login').style.display = 'none ';
+      document.getElementById('admin-panel').style.display = 'flex';
+      showAdminSection('dashboard');
+    }
+
+    function showAdminSection(sectionId) {
+      document.querySelectorAll('.admin-section').forEach(section => {
+        section.style.display = 'none';
+      });
+      document.getElementById(sectionId).style.display = 'block';
+    }
+
+    // Funções de autenticação
+    function handleAdminLogin(event) {
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Simulando autenticação
+      if (username === 'admin' && password === 'admin') {
+        localStorage.setItem('adminToken', 'mock-token');
+        showAdminPanel();
+      } else {
+        alert('Usuário ou senha inválidos');
+      }
+    }
+
+    function handleLogout() {
+      localStorage.removeItem('adminToken');
+      window.location.reload();
+    }
+
+    // Funções de reserva
+    function handleBooking(event) {
+      event.preventDefault();
+      const checkin = document.getElementById('checkin').value;
+      const checkout = document.getElementById('checkout').value;
+      const roomType = document.getElementById('room-type').value;
+      const guests = document.getElementById('guests').value;
+
+      // Simulando salvamento da reserva
+      const booking = {
+        id: Date.now(),
+        checkin,
+        checkout,
+        roomType,
+        guests,
+        status: 'pending'
+      };
+
+      mockData.bookings.push(booking);
+      alert('Reserva realizada com sucesso! Em breve entraremos em contato.');
+      event.target.reset();
+    }
+
+    // Carregamento inicial
+    window.onload = function() {
+      // Verificar autenticação
+      const adminToken = localStorage.getItem('adminToken');
+      if (window.location.hash === '#admin') {
+        if (adminToken) {
+          showAdminPanel();
+        } else {
+          showAdminLogin();
+        }
+      }
+
+      // Carregar dados mockados
+      loadMockData();
+    };
+
+    function loadMockData() {
+      // Carregar quartos
+      const roomsContainer = document.querySelector('#rooms .rooms-grid');
+      roomsContainer.innerHTML = mockData.rooms.map(room => `
+        <div class="room-card">
+          <img src="${room.image}" alt="${room.name}" class="room-image">
+          <div class="room-content">
+            <h3>${room.name}</h3>
+            <p>${room.description}</p>
+            <p>Capacidade: ${room.capacity} pessoas</p>
+            <p>Preço: R$ ${room.price}/noite</p>
+            <a href="#" class="btn btn-primary" onclick="showSection('booking')">Reservar</a>
+          </div>
+        </div>
+      `).join('');
+
+      // Carregar serviços
+      const servicesContainer = document.querySelector('#services .features-grid');
+      servicesContainer.innerHTML = mockData.services.map(service => `
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 16v-4"/>
+              <path d="M12 8h.01"/>
+            </svg>
+          </div>
+          <h3>${service.name}</h3>
+          <p>${service.description}</p>
+          ${service.price ? `<p>R$ ${service.price}</p>` : '<p>Incluso na diária</p>'}
+        </div>
+      `).join('');
+
+      // Carregar dashboard administrativo
+      const dashboard = document.getElementById('dashboard');
+      dashboard.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white p-4 rounded-lg shadow">
+            <h3>Total de Quartos</h3>
+            <p class="text-2xl font-bold">${mockData.rooms.length}</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <h3>Total de Serviços</h3>
+            <p class="text-2xl font-bold">${mockData.services.length}</p>
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <h3>Reservas Pendentes</h3>
+            <p class="text-2xl font-bold">${mockData.bookings.filter(b => b.status === 'pending').length}</p>
+          </div>
+        </div>
+      `;
+
+      // Carregar gerenciamento de reservas
+      const bookingsManager = document.getElementById('manage-bookings');
+      bookingsManager.innerHTML = `
+        <div class="overflow-x-auto">
+          <table class="w-full bg-white shadow-md rounded-lg">
+            <thead>
+              <tr>
+                <th class="p-4">ID</th>
+                <th class="p-4">Check-in</th>
+                <th class="p-4">Check-out</th>
+                <th class="p-4">Tipo de Quarto</th>
+                <th class="p-4">Hóspedes</th>
+                <th class="p-4">Status</th>
+                <th class="p-4">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${mockData.bookings.map(booking => `
+                <tr>
+                  <td class="p-4">${booking.id}</td>
+                  <td class="p-4">${booking.checkin}</td>
+                  <td class="p-4">${booking.checkout}</td>
+                  <td class="p-4">${booking.roomType}</td>
+                  <td class="p-4">${booking.guests}</td>
+                  <td class="p-4">${booking.status}</td>
+                  <td class="p-4">
+                    <button class="btn btn-primary" onclick="updateBookingStatus(${booking.id}, 'confirmed')">
+                      Confirmar
+                    </button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function updateBookingStatus(bookingId, status) {
+      const booking = mockData.bookings.find(b => b.id === bookingId);
+      if (booking) {
+        booking.status = status;
+        loadMockData();
+      }
+    }
+  </script>
+</body>
+</html>

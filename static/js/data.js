@@ -8,8 +8,7 @@ const mockData = {
       description: "Conforto e nobreza para sua estadia",
       price: 350,
       capacity: 2,
-      image:
-        "/static/img/aposento.jpeg",
+      image: "/static/img/aposento.jpeg",
     },
     {
       id: 2,
@@ -18,8 +17,7 @@ const mockData = {
       description: "Elegância e sofisticação medieval",
       price: 650,
       capacity: 2,
-      image:
-        "/static/img/camera.jpeg",
+      image: "/static/img/camera.jpeg",
     },
     {
       id: 3,
@@ -28,8 +26,7 @@ const mockData = {
       description: "O máximo em luxo medieval",
       price: 1200,
       capacity: 4,
-      image:
-        "/static/img/suiteMaster.jpeg",
+      image: "/static/img/suiteMaster.webp",
     },
   ],
   services: [
