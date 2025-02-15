@@ -1,0 +1,394 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Crimson Text", serif;
+  line-height: 1.6;
+  color: #2c1810;
+  background: #f4e4bc
+    url("https://www.transparenttextures.com/patterns/old-map.png");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  color: #4a2511;
+}
+
+/* Layout */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+header {
+  background: #2c1810;
+  border-bottom: 4px solid #8b4513;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #d4af37;
+  font-family: "Cinzel", serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #d4af37;
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ffd700;
+}
+
+/* Hero Section */
+.hero {
+  height: 600px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://images.unsplash.com/photo-1585543805890-6051f7829f98?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: #fff;
+  border-bottom: 4px solid #8b4513;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: url("https://www.transparenttextures.com/patterns/old-map.png");
+  opacity: 0.1;
+}
+
+.hero-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.hero-text {
+  max-width: 600px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: #d4af37;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+/* Botões */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  border: 2px solid;
+}
+
+.btn-primary {
+  background-color: #d4af37;
+  color: #2c1810;
+  border-color: #8b4513;
+}
+
+.btn-primary:hover {
+  background-color: #2c1810;
+  color: #d4af37;
+}
+
+/* Features Section */
+.features {
+  padding: 4rem 0;
+  background: url("https://www.transparenttextures.com/patterns/old-map.png");
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #4a2511;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 3px;
+  background: #8b4513;
+  margin: 1rem auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  text-align: center;
+  background: #fff;
+  padding: 2rem;
+  border: 2px solid #8b4513;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  width: 5rem;
+  height: 5rem;
+  background: #f4e4bc;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  border: 2px solid #8b4513;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #4a2511;
+}
+
+/* Rooms Section */
+.rooms {
+  padding: 4rem 0;
+  background: #2c1810
+    url("https://www.transparenttextures.com/patterns/old-map.png");
+  color: #f4e4bc;
+}
+
+.rooms .section-title {
+  color: #d4af37;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.room-card {
+  background: #f4e4bc;
+  border: 2px solid #8b4513;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.room-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-bottom: 2px solid #8b4513;
+}
+
+.room-content {
+  padding: 1.5rem;
+  color: #2c1810;
+}
+
+.room-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #4a2511;
+}
+
+/* Form Styles */
+.login-form {
+  max-width: 400px;
+  margin: 4rem auto;
+  background: #f4e4bc;
+  padding: 2rem;
+  border: 2px solid #8b4513;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  color: #4a2511;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #8b4513;
+  background: #fff;
+  font-family: "Crimson Text", serif;
+  font-size: 1rem;
+}
+
+/* Footer */
+footer {
+  background: #2c1810;
+  color: #f4e4bc;
+  padding: 3rem 0;
+  border-top: 4px solid #8b4513;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.footer-grid h3 {
+  color: #d4af37;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.footer-copyright {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #8b4513;
+  color: #d4af37;
+  font-family: "Cinzel", serif;
+  font-size: 0.9rem;
+}
+
+/* Admin Panel */
+.admin-login {
+  display: block;
+  min-height: 100vh;
+  background: #f4e4bc
+    url("https://www.transparenttextures.com/patterns/old-map.png");
+  padding: 2rem;
+}
+
+.admin-panel {
+  display: none;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background: #2c1810;
+  color: #f4e4bc;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 1.5rem;
+  border-right: 4px solid #8b4513;
+}
+
+.admin-content {
+  margin-left: 250px;
+  padding: 2rem;
+  background: #f4e4bc
+    url("https://www.transparenttextures.com/patterns/old-map.png");
+}
+
+.admin-nav {
+  margin-top: 2rem;
+}
+
+.admin-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  color: #d4af37;
+  text-decoration: none;
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: all 0.3s;
+  margin-bottom: 0.5rem;
+}
+
+.admin-nav a:hover {
+  background: #4a2511;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .admin-content {
+    margin-left: 0;
+  }
+
+  .admin-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+  }
+
+  .admin-sidebar.active {
+    transform: translateX(0);
+  }
+}
