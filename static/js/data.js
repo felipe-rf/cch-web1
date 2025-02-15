@@ -29,7 +29,7 @@ const mockData = {
       price: 1200,
       capacity: 4,
       image:
-        "/static/img/suiteMaster.jpeg",
+        "/static/img/suiteMaster.webp",
     },
   ],
   services: [
