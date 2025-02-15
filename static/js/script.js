@@ -9,7 +9,7 @@ const mockData = {
       price: 350,
       capacity: 2,
       image:
-        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "/static/img/aposento.jpeg",
     },
     {
       id: 2,
@@ -19,7 +19,7 @@ const mockData = {
       price: 650,
       capacity: 2,
       image:
-        "https://images.unsplash.com/photo-1551516594-56cb78394645?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "/static/img/camera.jpeg",
     },
     {
       id: 3,
@@ -29,7 +29,7 @@ const mockData = {
       price: 1200,
       capacity: 4,
       image:
-        "https://images.unsplash.com/photo-1582610116397-edb318620e96?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+        "/static/img/suiteMaster.jpeg",
     },
   ],
   services: [
