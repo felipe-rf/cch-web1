@@ -8,7 +8,6 @@ function showSection(sectionId) {
 
 // Funções de reserva
 
-
 // Carregamento inicial
 window.onload = function () {
   // Verificar autenticação
@@ -39,13 +38,12 @@ function loadMockData() {
           <div class="room-content">
             <h3>${room.name}</h3>
             <p>${room.description}</p>
-            <a href="/rooms/" class="btn btn-primary">Saiba mais</a>
+            <a href="rooms/" class="btn btn-primary">Saiba mais</a>
           </div>
         </div>
       `
     )
     .join("");
- 
 
   // Carregar dashboard administrativo
   const dashboard = document.getElementById("dashboard");
@@ -67,5 +65,4 @@ function loadMockData() {
             </div>
           </div>
         `;
-
-            }
+}
