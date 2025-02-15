@@ -1,65 +1,3 @@
-// Dados mockados
-const mockData = {
-  rooms: [
-    {
-      id: 1,
-      type: "cavaleiro",
-      name: "Aposento do Cavaleiro",
-      description: "Conforto e nobreza para sua estadia",
-      price: 350,
-      capacity: 2,
-      image:
-        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: 2,
-      type: "real",
-      name: "Câmara Real",
-      description: "Elegância e sofisticação medieval",
-      price: 650,
-      capacity: 2,
-      image:
-        "https://images.unsplash.com/photo-1551516594-56cb78394645?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: 3,
-      type: "imperial",
-      name: "Suíte Imperial",
-      description: "O máximo em luxo medieval",
-      price: 1200,
-      capacity: 4,
-      image:
-        "https://images.unsplash.com/photo-1582610116397-edb318620e96?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    },
-  ],
-  services: [
-    {
-      id: 1,
-      name: "Banquete Medieval",
-      description: "Festim completo com pratos típicos da época",
-      price: 200,
-    },
-    {
-      id: 2,
-      name: "Torneio de Arco e Flecha",
-      description: "Aprenda com nossos mestres arqueiros",
-      price: 100,
-    },
-    {
-      id: 3,
-      name: "Passeio a Cavalo",
-      description: "Explore nossos domínios em uma montaria real",
-      price: 150,
-    },
-    {
-      id: 4,
-      name: "Serviço de Mensageiro",
-      description: "Entrega de mensagens e pequenos objetos",
-      price: 50,
-    },
-  ],
-  bookings: [],
-};
 
 // Funções de navegação
 function showSection(sectionId) {
@@ -67,46 +5,6 @@ function showSection(sectionId) {
     section.style.display = "none";
   });
   document.getElementById(sectionId).style.display = "block";
-}
-
-function showAdminLogin() {
-  document.getElementById("main-site").style.display = "none";
-  document.getElementById("admin-login").style.display = "block";
-  document.getElementById("admin-panel").style.display = "none";
-}
-
-function showAdminPanel() {
-  document.getElementById("main-site").style.display = "none";
-  document.getElementById("admin-login").style.display = "none";
-  document.getElementById("admin-panel").style.display = "flex";
-  showAdminSection("dashboard");
-}
-
-function showAdminSection(sectionId) {
-  document.querySelectorAll(".admin-section").forEach((section) => {
-    section.style.display = "none";
-  });
-  document.getElementById(sectionId).style.display = "block";
-}
-
-// Funções de autenticação
-function handleAdminLogin(event) {
-  event.preventDefault();
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-
-  // Simulando autenticação
-  if (username === "admin" && password === "admin") {
-    localStorage.setItem("adminToken", "mock-token");
-    showAdminPanel();
-  } else {
-    alert("Credenciais inválidas");
-  }
-}
-
-function handleLogout() {
-  localStorage.removeItem("adminToken");
-  window.location.reload();
 }
 
 // Funções de reserva
@@ -153,24 +51,6 @@ window.onload = function () {
 };
 
 function loadMockData() {
-  // Carregar quartos
-  const roomsContainer = document.querySelector("#rooms .rooms-grid");
-  roomsContainer.innerHTML = mockData.rooms
-    .map(
-      (room) => `
-          <div class="room-card">
-            <img src="${room.image}" alt="${room.name}" class="room-image">
-            <div class="room-content">
-              <h3>${room.name}</h3>
-              <p>${room.description}</p>
-              <p>Capacidade: ${room.capacity} pessoas</p>
-              <p>Preço: ${room.price} moedas de ouro/noite</p>
-              <a href="#" class="btn btn-primary" onclick="showSection('booking')">Reservar</a>
-            </div>
-          </div>
-        `
-    )
-    .join("");
 
   // Carregar serviços
   const servicesContainer = document.querySelector("#services .features-grid");
