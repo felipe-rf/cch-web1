@@ -3,9 +3,12 @@ import os
 
 class CustomHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
-        if self.path == "/admin/":
+        self.path = self.path.rstrip("/")
+        if self.path == "/admin":
             self.path = "pages/admin.html"  # Arquivo HTML para a rota /admin
-        elif self.path == "/":
+        elif self.path == "/rooms":
+            self.path = "pages/rooms.html"  # Arquivo HTML para a rota /admin
+        elif self.path == "":
             self.path = "index.html"  # Arquivo principal
         else:
             self.path = self.path.lstrip("/")

@@ -69,46 +69,6 @@ function showSection(sectionId) {
   document.getElementById(sectionId).style.display = "block";
 }
 
-function showAdminLogin() {
-  document.getElementById("main-site").style.display = "none";
-  document.getElementById("admin-login").style.display = "block";
-  document.getElementById("admin-panel").style.display = "none";
-}
-
-function showAdminPanel() {
-  document.getElementById("main-site").style.display = "none";
-  document.getElementById("admin-login").style.display = "none";
-  document.getElementById("admin-panel").style.display = "flex";
-  showAdminSection("dashboard");
-}
-
-function showAdminSection(sectionId) {
-  document.querySelectorAll(".admin-section").forEach((section) => {
-    section.style.display = "none";
-  });
-  document.getElementById(sectionId).style.display = "block";
-}
-
-// Funções de autenticação
-function handleAdminLogin(event) {
-  event.preventDefault();
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
-
-  // Simulando autenticação
-  if (username === "admin" && password === "admin") {
-    localStorage.setItem("adminToken", "mock-token");
-    showAdminPanel();
-  } else {
-    alert("Credenciais inválidas");
-  }
-}
-
-function handleLogout() {
-  localStorage.removeItem("adminToken");
-  window.location.reload();
-}
-
 // Funções de reserva
 function handleBooking(event) {
   event.preventDefault();
@@ -153,24 +113,6 @@ window.onload = function () {
 };
 
 function loadMockData() {
-  // Carregar quartos
-  const roomsContainer = document.querySelector("#rooms .rooms-grid");
-  roomsContainer.innerHTML = mockData.rooms
-    .map(
-      (room) => `
-          <div class="room-card">
-            <img src="${room.image}" alt="${room.name}" class="room-image">
-            <div class="room-content">
-              <h3>${room.name}</h3>
-              <p>${room.description}</p>
-              <p>Capacidade: ${room.capacity} pessoas</p>
-              <p>Preço: ${room.price} moedas de ouro/noite</p>
-              <a href="#" class="btn btn-primary" onclick="showSection('booking')">Reservar</a>
-            </div>
-          </div>
-        `
-    )
-    .join("");
 
   // Carregar serviços
   const servicesContainer = document.querySelector("#services .features-grid");
