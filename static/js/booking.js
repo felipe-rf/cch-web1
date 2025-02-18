@@ -1,50 +1,30 @@
 function handleBooking(event) {
-    event.preventDefault();
-    const checkin = document.getElementById("checkin").value;
-    const checkout = document.getElementById("checkout").value;
-    const roomType = document.getElementById("room-type").value;
-    const guests = document.getElementById("guests").value;
-  
-    // Simulando salvamento da reserva
-    const booking = {
-      id: Date.now(),
-      checkin,
-      checkout,
-      roomType,
-      guests,
-      status: "pending",
-    };
-  
-    mockData.bookings.push(booking);
-    alert(
-      "Sua reserva foi realizada com sucesso! Em breve um mensageiro entrará em contato."
-    );
-    event.target.reset();
-  }
- // Carregar dashboard administrativo
- const dashboard = document.getElementById("dashboard");
- dashboard.innerHTML = `
-         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-           <div class="feature-card">
-             <h3>Total de Aposentos</h3>
-             <p class="text-2xl font-bold">${mockData.rooms.length}</p>
-           </div>
-           <div class="feature-card">
-             <h3>Total de Serviços</h3>
-             <p class="text-2xl font-bold">${mockData.services.length}</p>
-           </div>
-           <div class="feature-card">
-             <h3>Reservas Pendentes</h3>
-             <p class="text-2xl font-bold">${
-               mockData.bookings.filter((b) => b.status === "pending").length
-             }</p>
-           </div>
-         </div>
-       `;
+  event.preventDefault();
+  const checkin = document.getElementById("checkin").value;
+  const checkout = document.getElementById("checkout").value;
+  const roomType = document.getElementById("room-type").value;
+  const guests = document.getElementById("guests").value;
 
- // Carregar gerenciamento de reservas
- const bookingsManager = document.getElementById("manage-bookings");
- bookingsManager.innerHTML = `
+  // Simulando salvamento da reserva
+  const booking = {
+    id: Date.now(),
+    checkin,
+    checkout,
+    roomType,
+    guests,
+    status: "pending",
+  };
+
+  mockData.bookings.push(booking);
+  alert(
+    "Sua reserva foi realizada com sucesso! Em breve um mensageiro entrará em contato."
+  );
+  event.target.reset();
+}
+
+// Carregar gerenciamento de reservas
+const bookingsManager = document.getElementById("manage-bookings");
+bookingsManager.innerHTML = `
          <div class="overflow-x-auto">
            <table class="w-full bg-white shadow-md" style="border: 2px solid #8b4513;">
              <thead style="background: #2c1810; color: #d4af37;">
@@ -82,13 +62,11 @@ function handleBooking(event) {
            </table>
          </div>
        `;
-               
-
 
 function updateBookingStatus(bookingId, status) {
- const booking = mockData.bookings.find((b) => b.id === bookingId);
- if (booking) {
-   booking.status = status;
-   loadMockData();
- }
+  const booking = mockData.bookings.find((b) => b.id === bookingId);
+  if (booking) {
+    booking.status = status;
+    loadMockData();
+  }
 }

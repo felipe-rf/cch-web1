@@ -35,3 +35,24 @@ function handleLogout() {
   localStorage.removeItem("adminToken");
   window.location.reload();
 }
+
+// Carregar dashboard administrativo
+const dashboard = document.getElementById("dashboard");
+dashboard.innerHTML = `
+         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+           <div class="feature-card">
+             <h3>Total de Aposentos</h3>
+             <p class="text-2xl font-bold">${mockData.rooms.length}</p>
+           </div>
+           <div class="feature-card">
+             <h3>Total de Serviços</h3>
+             <p class="text-2xl font-bold">${mockData.services.length}</p>
+           </div>
+           <div class="feature-card">
+             <h3>Reservas Pendentes</h3>
+             <p class="text-2xl font-bold">${
+               mockData.bookings.filter((b) => b.status === "pending").length
+             }</p>
+           </div>
+         </div>
+       `;

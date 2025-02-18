@@ -57,3 +57,9 @@ const mockData = {
   ],
   bookings: [],
 };
+
+var carouselImages = [
+  "/static/img/hero1.png",
+  "/static/img/hero2.png",
+  "/static/img/hero3.jpg",
+];

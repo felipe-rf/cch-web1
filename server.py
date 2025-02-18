@@ -5,7 +5,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path.startswith("/static") or self.path == "/": 
             return super().do_GET()
-
+        self.path = "/" + self.path.rstrip("/")
         self.path = f"/pages/{self.path}.html"
 
         return super().do_GET()

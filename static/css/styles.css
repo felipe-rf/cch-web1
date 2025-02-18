@@ -79,54 +79,105 @@ nav {
   color: #ffd700;
 }
 
-/* Hero Section */
-.hero {
-  height: 600px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("https://i0.wp.com/theluxurytravelexpert.com/wp-content/uploads/2017/04/dromoland-castle-ireland.jpg?ssl=1");
+/* Hero Carousel */
+.hero-carousel {
+  height: 94vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-container {
+  height: 100%;
+  position: relative;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
   background-size: cover;
   background-position: center;
-  position: relative;
-  color: #fff;
-  border-bottom: 4px solid #8b4513;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background: url("https://www.transparenttextures.com/patterns/old-map.png");
-  opacity: 0.1;
-}
-
-.hero-content {
-  position: relative;
-  height: 100%;
   display: flex;
   align-items: center;
-  z-index: 1;
+  justify-content: center;
 }
 
-.hero-text {
-  max-width: 600px;
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.slide-content {
   text-align: center;
-  margin: 0 auto;
+  color: #fff;
+  padding: 2rem;
 }
 
-.hero h1 {
+.slide-content h1 {
   font-size: 4rem;
   margin-bottom: 1rem;
   color: #d4af37;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.hero p {
+.slide-content p {
   font-size: 1.5rem;
   margin-bottom: 2rem;
   font-style: italic;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.carousel-btn:hover {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.carousel-btn.prev {
+  left: 20px;
+}
+
+.carousel-btn.next {
+  right: 20px;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background: #d4af37;
 }
 
 /* Botões */
@@ -157,6 +208,7 @@ nav {
 .features {
   padding: 4rem 0;
   background: url("https://www.transparenttextures.com/patterns/old-map.png");
+  margin-bottom: 40px;
 }
 
 .section-title {
@@ -166,6 +218,7 @@ nav {
   color: #4a2511;
   text-transform: uppercase;
   letter-spacing: 2px;
+  margin-top: 20px;
 }
 
 .section-title::after {
@@ -214,7 +267,10 @@ nav {
   padding: 4rem 0;
   background: #2c1810
     url("https://www.transparenttextures.com/patterns/old-map.png");
+  background-position: center;
   color: #f4e4bc;
+  align-self: stretch;
+  margin-bottom: -50px;
 }
 
 .rooms .section-title {
@@ -290,6 +346,7 @@ footer {
   color: #f4e4bc;
   padding: 3rem 0;
   border-top: 4px solid #8b4513;
+  margin-top: 50px;
 }
 
 .footer-grid {
@@ -348,7 +405,9 @@ footer {
 }
 
 .admin-nav {
-  margin-top: 2rem;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .admin-nav a {
@@ -375,20 +434,20 @@ footer {
     display: none;
   }
 
-  .hero h1 {
+  .slide-content h1 {
     font-size: 2.5rem;
   }
 
-  .admin-content {
-    margin-left: 0;
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
   }
 
-  .admin-sidebar {
-    transform: translateX(-100%);
-    transition: transform 0.3s;
+  .carousel-btn.prev {
+    left: 10px;
   }
 
-  .admin-sidebar.active {
-    transform: translateX(0);
+  .carousel-btn.next {
+    right: 10px;
   }
 }

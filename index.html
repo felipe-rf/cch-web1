@@ -1,137 +1,145 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Castelo Real - Hospedagem Medieval</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./static/css/styles.css">
+  <!DOCTYPE html>
+  <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Castelo Real - Hospedagem Medieval</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/styles.css">
 
-<body>
-  <!-- Site Principal -->
-  <div id="main-site">
-    <header>
-      <div class="container">
-        <nav>
-          <a href="/" class="logo">
-            Castelo Real
-          </a>
-          <div class="nav-links">
-            <a href='/'>Início</a>
-            <a href='/rooms'>Aposentos</a>
-            <a href="/service">Serviços</a>
-            <a href="/booking" >Reservas</a>
-            <a href="/location" >Localização</a>
-            <a href='/admin'>Admin</a>
+  <body>
+    <!-- Site Principal -->
+    <div id="main-site">
+      <header>
+        <div class="container">
+          <nav>
+            <a href="/" class="logo">
+              Castelo Real
+            </a>
+            <div class="nav-links">
+              <a href='/'>Início</a>
+              <a href='/rooms'>Aposentos</a>
+              <a href="/service">Serviços</a>
+              <a href="/booking" >Reservas</a>
+              <a href="/location" >Localização</a>
+              <a href='/admin/'>Admin</a>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <!-- Seção Home -->
+      <div id="home" class="section">
+        <div class="hero-carousel">
+          <div class="carousel-container">
+            <!-- Slides will be generated dynamically -->
           </div>
-        </nav>
+
+          <button class="carousel-btn prev">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button class="carousel-btn next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <div class="carousel-dots"></div>
+        </div>
+
+
+        <section class="features">
+          <div class="container">
+            <h2 class="section-title">Por que escolher o Castelo Real?</h2>
+            <div class="features-grid">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b4513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                </div>
+                <h3>Luxo Real</h3>
+                <p>Acomodações dignas da realeza medieval</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b4513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                  </svg>
+                </div>
+                <h3>História Viva</h3>
+                <p>Ambiente autêntico do período medieval</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b4513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                </div>
+                <h3>Serviço Real</h3>
+                <p>Atendimento digno da nobreza</p>
+              </div>
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b4513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3h18v18H3z"/>
+                    <path d="M12 8v8"/>
+                    <path d="M8 12h8"/>
+                  </svg>
+                </div>
+                <h3>Banquetes</h3>
+                <p>Gastronomia medieval refinada</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="rooms">
+          <div class="container">
+            <h2 class="section-title">Nossos Aposentos</h2>
+            <div class="rooms-grid">
+
+            </div>
+          </div>
+        </section>
       </div>
-    </header>
-
-    <!-- Seção Home -->
-    <div id="home" class="section">
-      <div class="hero">
+      <footer>
         <div class="container">
-          <div class="hero-content">
-            <div class="hero-text">
-              <h1>Castelo Real</h1>
-              <p>Uma experiência medieval única em acomodações de luxo</p>
-              <a href="#" class="btn btn-primary" onclick="showSection('booking')">Reserve Sua Estadia</a>
+          <div class="footer-grid">
+            <div>
+              <h3>Castelo Real</h3>
+              <p>Oferecendo uma experiência medieval única desde 1500.</p>
+            </div>
+            <div>
+              <h3>Contato</h3>
+              <p>(11) 1234-5678</p>
+              <p>contato@casteloreal.com.br</p>
+            </div>
+            <div>
+              <h3>Endereço</h3>
+              <p>
+                Av. Paulista, 1000<br>
+                São Paulo - SP<br>
+                CEP: 01310-100
+              </p>
             </div>
           </div>
-        </div>
-      </div>
-
-      <section class="features">
-        <div class="container">
-          <h2 class="section-title">Por que escolher o Castelo Real?</h2>
-          <div class="features-grid">
-            <div class="feature-card">
-              <div class="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b4513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-              </div>
-              <h3>Luxo Real</h3>
-              <p>Acomodações dignas da realeza medieval</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b4513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 6v6l4 2"/>
-                </svg>
-              </div>
-              <h3>História Viva</h3>
-              <p>Ambiente autêntico do período medieval</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b4513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                  <circle cx="12" cy="7" r="4"/>
-                </svg>
-              </div>
-              <h3>Serviço Real</h3>
-              <p>Atendimento digno da nobreza</p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b4513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M3 3h18v18H3z"/>
-                  <path d="M12 8v8"/>
-                  <path d="M8 12h8"/>
-                </svg>
-              </div>
-              <h3>Banquetes</h3>
-              <p>Gastronomia medieval refinada</p>
-            </div>
+          <div class="footer-copyright">
+            <p>&copy; 2024 Castelo Real. Todos os direitos reservados.</p>
           </div>
         </div>
-      </section>
-
-      <section class="rooms">
-        <div class="container">
-          <h2 class="section-title">Nossos Aposentos</h2>
-          <div class="rooms-grid">
-
-          </div>
-        </div>
-      </section>
+      </footer>
     </div>
-    <footer>
-      <div class="container">
-        <div class="footer-grid">
-          <div>
-            <h3>Castelo Real</h3>
-            <p>Oferecendo uma experiência medieval única desde 1500.</p>
-          </div>
-          <div>
-            <h3>Contato</h3>
-            <p>(11) 1234-5678</p>
-            <p>contato@casteloreal.com.br</p>
-          </div>
-          <div>
-            <h3>Endereço</h3>
-            <p>
-              Av. Paulista, 1000<br>
-              São Paulo - SP<br>
-              CEP: 01310-100
-            </p>
-          </div>
-        </div>
-        <div class="footer-copyright">
-          <p>&copy; 2024 Castelo Real. Todos os direitos reservados.</p>
-        </div>
-      </div>
-    </footer>
-  </div>
-  </div>
+    </div>
 
-  <script  src="/static/js/data.js"></script>
-  <script src="/static/js/script.js"></script>
+    <script  src="/static/js/data.js"></script>
+    <script src="/static/js/script.js"></script>
 
-</body>
-</html>
+  </body>
+  </html>
