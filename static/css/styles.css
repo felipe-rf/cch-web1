@@ -21,6 +21,8 @@ h6 {
   font-family: "Cinzel", serif;
   font-weight: 600;
   color: #4a2511;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 /* Layout */
@@ -426,6 +428,26 @@ footer {
 
 .admin-nav a:hover {
   background: #4a2511;
+}
+
+.admin-section {
+  grid-auto-flow: row;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+#room-form {
+  width: 25%;
+}
+
+/* Image Preview */
+.image-preview {
+  width: 100%;
+  max-height: 150px;
+  margin-top: 10px;
+  display: none;
+  border-radius: 5px;
+  object-fit: cover;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsividade */

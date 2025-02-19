@@ -1,11 +1,18 @@
-function showAdminLogin() {
-  document.getElementById("admin-login").style.display = "block";
-  document.getElementById("admin-panel").style.display = "none";
-}
+// Carregamento inicial
+window.onload = function () {
+  refreshData();
+  // Verificar autenticação
+  const adminToken = localStorage.getItem("adminToken");
+  if (adminToken) {
+    showAdminPanel();
+    showSection();
+  } else {
+    window.location.href = "/admin/login";
+  }
+};
 
 function showAdminPanel() {
-  document.getElementById("admin-login").style.display = "none";
-  document.getElementById("admin-panel").style.display = "flex";
+  document.getElementById("admin-panel").style.display = "inline";
   showAdminSection("dashboard");
 }
 
@@ -13,32 +20,37 @@ function showAdminSection(sectionId) {
   document.querySelectorAll(".admin-section").forEach((section) => {
     section.style.display = "none";
   });
-  document.getElementById(sectionId).style.display = "block";
+  document.getElementById(sectionId).style.display = "inline";
 }
 
-// Funções de autenticação
-function handleAdminLogin(event) {
-  event.preventDefault();
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+function showSubSection(sectionId) {
+  // Find the currently visible admin section
+  const activeAdminSection = document.querySelector(
+    ".admin-section[style*='inline']"
+  );
 
-  // Simulando autenticação
-  if (username === "admin" && password === "admin") {
-    localStorage.setItem("adminToken", "mock-token");
-    showAdminPanel();
-  } else {
-    alert("Credenciais inválidas");
+  if (activeAdminSection) {
+    // Hide only the sub-sections within the active admin section
+    activeAdminSection.querySelectorAll(".sub-section").forEach((section) => {
+      section.style.display = "none";
+    });
+
+    // Show the requested sub-section
+    const targetSubSection = document.getElementById(sectionId);
+    if (targetSubSection && activeAdminSection.contains(targetSubSection)) {
+      targetSubSection.style.display = "inline";
+    }
   }
 }
-
 function handleLogout() {
   localStorage.removeItem("adminToken");
   window.location.reload();
 }
 
-// Carregar dashboard administrativo
-const dashboard = document.getElementById("dashboard");
-dashboard.innerHTML = `
+function refreshData() {
+  // Carregar dashboard administrativo
+  const dashboard = document.getElementById("dashboard");
+  dashboard.innerHTML = `
          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
            <div class="feature-card">
              <h3>Total de Aposentos</h3>
@@ -56,3 +68,155 @@ dashboard.innerHTML = `
            </div>
          </div>
        `;
+
+  const roomsContainer = document.querySelector(".rooms-grid");
+  roomsContainer.innerHTML = mockData.rooms
+    .map(
+      (room) => `
+               <div class="room-card">
+                 <img src="${room.image}" alt="${room.name}" class="room-image">
+                 <div class="room-content">
+                   <h3>${room.name}</h3>
+                   <p>${room.description}</p>
+                   <p>Capacidade: ${room.capacity} pessoas</p>
+                   <p>Preço: ${room.price} moedas de ouro/noite</p>
+                   <a href="#" class="btn btn-primary" onclick="deleteRoom(${room.id})">Deletar</a>;
+                 </div>
+               </div>
+             `
+    )
+    .join("");
+
+  const serviceContainer = document.querySelector(".service-grid");
+  serviceContainer.innerHTML = mockData.services
+    .map(
+      (service) => `
+              <div class="feature-card">
+              <div class="feature-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8b4513" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 16v-4"/>
+                  <path d="M12 8h.01"/>
+                  </svg>
+              </div>
+              <h3>${service.name}</h3>
+              <p>${service.description}</p>
+              <a href="#" class="btn btn-primary" onclick="deleteService(${service.id})">Deletar</a>;
+              </div>
+          `
+    )
+    .join("");
+}
+
+function uploadImage() {
+  const fileInput = document.getElementById("imageUpload");
+
+  if (fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
+
+    fetch("http://localhost:8000/upload", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => console.log("Upload successful:", data))
+      .catch((error) => console.error("Error:", error));
+    return;
+  } else {
+    console.log("No file selected.");
+  }
+}
+
+function addRoom(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const description = document.getElementById("desc").value;
+  const price = parseFloat(document.getElementById("price").value);
+  const capacity = parseInt(document.getElementById("capacity").value);
+  const image_name = document.getElementById("imageUpload").files[0].name;
+  const image = "/static/img/" + image_name;
+  const newRoom = {
+    id: mockData.rooms.length + 1, // Generate a new ID
+    name,
+    description,
+    price,
+    capacity,
+    image,
+  };
+
+  // Add the new room to the rooms array
+  mockData.rooms.push(newRoom);
+  localStorage.setItem("roomsData", JSON.stringify(mockData));
+
+  // Re-render the room list
+  refreshData();
+}
+
+document
+  .getElementById("room-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevents unwanted page refresh
+    uploadImage();
+    addRoom(event);
+    showSubSection("rooms-grid");
+  });
+
+function deleteRoom(roomId) {
+  // Filter out the room with the given ID
+  mockData.rooms = mockData.rooms.filter((room) => room.id !== roomId);
+
+  // Save the updated rooms data to localStorage
+  localStorage.setItem("roomsData", JSON.stringify(mockData));
+
+  // Re-render the room list
+  refreshData();
+}
+
+// Service dashboard
+
+function addService(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("service-name").value;
+  const description = document.getElementById("service-desc").value;
+  const price = parseFloat(document.getElementById("service-price").value);
+  const newService = {
+    id: mockData.services.length + 1, // Generate a new ID
+    name,
+    description,
+    price,
+    capacity,
+    image,
+  };
+
+  // Add the new room to the rooms array
+  mockData.services.push(newService);
+  localStorage.setItem("roomsData", JSON.stringify(mockData));
+
+  // Re-render the room list
+  refreshData();
+}
+
+document
+  .getElementById("service-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevents unwanted page refresh
+    addRoom(event);
+    showSubSection("service-grid");
+  });
+
+function deleteRoom(serviceId) {
+  // Filter out the room with the given ID
+  mockData.rooms = mockData.services.filter(
+    (service) => service.id !== serviceId
+  );
+
+  // Save the updated rooms data to localStorage
+  localStorage.setItem("roomsData", JSON.stringify(mockData));
+
+  // Re-render the room list
+  refreshData();
+}
