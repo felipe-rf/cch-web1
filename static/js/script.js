@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const carouselContainer = document.querySelector(".carousel-container");
 
   // Generate slides
-  carouselImages.forEach((imageUrl, index) => {
+  carousselImages.forEach((imageUrl, index) => {
     const slide = document.createElement("div");
     slide.className = `carousel-slide ${index === 0 ? "active" : ""}`;
     slide.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${imageUrl})`;

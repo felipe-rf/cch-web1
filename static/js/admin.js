@@ -113,17 +113,17 @@ function refreshData() {
   imageContainer.innerHTML = carousselImages
     .map(
       (src) => `
-      <div class="room-card">
+      <div class="feature-card">
         <img src="${src}" alt="Carousel image" class="room-image">
-         <a href="#" class="btn btn-primary" onclick="deleteImage(${src})">Deletar</a>
+         <a href="#" class="btn btn-primary" onclick="deleteImage('${src}')">Deletar</a>
       </div>
     `
     )
     .join("");
 }
 
-function uploadImage() {
-  const fileInput = document.getElementById("imageUpload");
+function uploadImage(section) {
+  const fileInput = document.getElementById(`${section}-imageUpload`);
 
   if (fileInput.files.length > 0) {
     const file = fileInput.files[0];
@@ -150,7 +150,7 @@ function addRoom(event) {
   const description = document.getElementById("desc").value;
   const price = parseFloat(document.getElementById("price").value);
   const capacity = parseInt(document.getElementById("capacity").value);
-  const image_name = document.getElementById("imageUpload").files[0].name;
+  const image_name = document.getElementById("room-imageUpload").files[0].name;
   const image = "/static/img/" + image_name;
   const newRoom = {
     id: mockData.rooms.length + 1, // Generate a new ID
@@ -194,7 +194,7 @@ function editRoom(event, roomId) {
   if (imageInput) {
     const image_name = imageInput.name;
     mockData.rooms[roomIndex].image = "/static/img/" + image_name;
-    uploadImage();
+    uploadImage("edit");
   }
 
   // Save updated data
@@ -229,7 +229,7 @@ document
   .getElementById("create-room-form")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Prevents unwanted page refresh
-    uploadImage();
+    uploadImage("rooms");
     addRoom(event);
     showSubSection("rooms-grid");
   });
@@ -296,3 +296,27 @@ document
     addService(event);
     showSubSection("service-grid");
   });
+
+document
+  .getElementById("images-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    uploadImage("images");
+    const image_name =
+      document.getElementById("images-imageUpload").files[0].name;
+    const image = "/static/img/" + image_name;
+    carousselImages.push(image);
+    localStorage.setItem("images", JSON.stringify(carousselImages));  
+    showSubSection("images-grid");
+  });
+
+function deleteImage(img_src) {
+  // Filter out the room with the given ID
+  carousselImages = carousselImages.filter((img) => img !== img_src);
+
+  // Save the updated rooms data to localStorage
+  localStorage.setItem("images", JSON.stringify(carousselImages));
+
+  // Re-render the room list
+  refreshData();
+}

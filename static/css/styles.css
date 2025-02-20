@@ -451,6 +451,12 @@ form {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
 
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
 /* Responsividade */
 @media (max-width: 768px) {
   .nav-links {

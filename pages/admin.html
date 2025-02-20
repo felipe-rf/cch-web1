@@ -99,8 +99,8 @@
               <input type="number" id="price" min='1' required>
             </div>
             <div class="form-group">
-              <label for="imageUpload">Imagem</label>
-              <input type="file" id="imageUpload" class="btn btn-primary" accept="image/*" onchange="previewImage(event)" required>
+              <label for="rooms-imageUpload">Imagem</label>
+              <input type="file" id="rooms-imageUpload" class="btn btn-primary" accept="image/*" onchange="previewImage(event)" required>
             </div>
             <button type="reset" class="btn btn-primary" href="#" onclick="showSubSection('rooms-grid')">Cancelar</button>
             <button type="submit" class="btn btn-primary" href="#">Confirmar</button>
@@ -158,8 +158,8 @@
         </div>
 
         <div id="service-grid" class="sub-section" style="display: inline;">
-          <div class="rooms-card">
-            <div class="feature-content">
+          <div class="room-card">
+            <div class="room-content">
               <button type="reset" class="btn btn-primary" href="#" onclick="showSubSection('create-service')">Novo Serviço</button>
             </div>
           </div>
@@ -173,7 +173,24 @@
       </div>
       <div id="manage-photos" class="admin-section" style="display: none;">
         <h2>Gerenciar Fotos</h2>
-        <div class="images-grid"></div>
+        <div id="create-images" class="sub-section" style="display: none;">
+          <form id="images-form">
+            <div class="form-group">
+              <label for="images-imageUpload">Imagem</label>
+              <input type="file" id="images-imageUpload" class="btn btn-primary" accept="image/*" onchange="previewImage(event)"  >
+            </div>
+            <button type="reset" class="btn btn-primary" href="#" onclick="showSubSection('images-grid')">Cancelar</button>
+            <button type="submit" class="btn btn-primary" href="#">Confirmar</button>
+          </form>
+        </div>
+        <div id="images-grid" class="sub-section" style="display: inline;">
+          <div class="room-card">
+            <div class="room-content">
+              <button type="reset" class="btn btn-primary" href="#" onclick="showSubSection('create-images')">Nova Imagem</button>
+            </div>
+          </div>
+          <div class="images-grid"></div>
+        </div>
         <!-- Conteúdo de gerenciamento de fotos será carregado via JavaScript -->
       </div>
     </div>
