@@ -103,6 +103,7 @@ function refreshData() {
               </div>
               <h3>${service.name}</h3>
               <p>${service.description}</p>
+              <a href="#" class="btn btn-primary" onclick="showEditService(${service.id})">Editar</a>
               <a href="#" class="btn btn-primary" onclick="deleteService(${service.id})">Deletar</a>
               </div>
           `
@@ -150,7 +151,7 @@ function addRoom(event) {
   const description = document.getElementById("desc").value;
   const price = parseFloat(document.getElementById("price").value);
   const capacity = parseInt(document.getElementById("capacity").value);
-  const image_name = document.getElementById("room-imageUpload").files[0].name;
+  const image_name = document.getElementById("rooms-imageUpload").files[0].name;
   const image = "/static/img/" + image_name;
   const newRoom = {
     id: mockData.rooms.length + 1, // Generate a new ID
@@ -253,8 +254,6 @@ function deleteRoom(roomId) {
   refreshData();
 }
 
-
-
 // Service dashboard
 
 function addService(event) {
@@ -280,23 +279,23 @@ function addService(event) {
 
 function editService(event, serviceId) {
   event.preventDefault();
-  const name = document.getElementById("service-name").value;
-  const description = document.getElementById("service-desc").value;
-  const price = parseFloat(document.getElementById("service-price").value);
-
+  const name = document.getElementById("edit-service-name").value;
+  const description = document.getElementById("edit-service-desc").value;
+  const price = parseFloat(document.getElementById("edit-service-price").value);
 
   // Find the room by ID
-  const serviceIndex = mockData.service.findIndex((service) => service.id === serviceId);
+  const serviceIndex = mockData.services.findIndex(
+    (service) => service.id === serviceId
+  );
   if (serviceIndex === -1) {
     alert("Service not found!");
     return;
   }
 
   // Update room properties
-  mockData.service[serviceIndex].name = name;
-  mockData.service[serviceIndex].description = description;
-  mockData.service[serviceIndex].price = price;
- 
+  mockData.services[serviceIndex].name = name;
+  mockData.services[serviceIndex].description = description;
+  mockData.services[serviceIndex].price = price;
 
   // Save updated data
   localStorage.setItem("serviceData", JSON.stringify(mockData));
@@ -307,17 +306,21 @@ function editService(event, serviceId) {
 
 function showEditService(serviceId) {
   // Find the room by ID
-  const serviceIndex = mockData.service.findIndex((service) => service.id === serviceId);
+  const serviceIndex = mockData.services.findIndex(
+    (service) => service.id === serviceId
+  );
   if (serviceIndex === -1) {
     alert("Service not found!");
     return;
   }
 
   // Update room properties
-  document.getElementById("edit-service-name").value = mockData.service[serviceIndex].name;
+  document.getElementById("edit-service-name").value =
+    mockData.services[serviceIndex].name;
   document.getElementById("edit-service-desc").value =
-    mockData.service[serviceIndex].description;
-  document.getElementById("edit-service-price").value = mockData.service[service].price;
+    mockData.services[serviceIndex].description;
+  document.getElementById("edit-service-price").value =
+    mockData.services[serviceIndex].price;
   showSubSection("edit-service");
   const form = document.getElementById("edit-service-form");
   form.serviceid = serviceId;
@@ -327,7 +330,6 @@ document
   .getElementById("create-service-form")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Prevents unwanted page refresh
-    uploadImage();
     addService(event);
     showSubSection("service-grid");
   });
@@ -339,8 +341,6 @@ document
     editService(event, document.getElementById("edit-service-form").serviceid);
     showSubSection("service-grid");
   });
-
-
 
 function deleteService(serviceId) {
   // Filter out the room with the given ID
@@ -372,7 +372,7 @@ document
       document.getElementById("images-imageUpload").files[0].name;
     const image = "/static/img/" + image_name;
     carousselImages.push(image);
-    localStorage.setItem("images", JSON.stringify(carousselImages));  
+    localStorage.setItem("images", JSON.stringify(carousselImages));
     showSubSection("images-grid");
   });
 

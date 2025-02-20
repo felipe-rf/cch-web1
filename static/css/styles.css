@@ -437,7 +437,7 @@ footer {
   gap: 2rem;
 }
 form {
-  max-width: 25%;
+  max-width: 800px;
 }
 
 /* Image Preview */
