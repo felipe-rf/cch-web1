@@ -115,6 +115,7 @@ function refreshData() {
       (src) => `
       <div class="room-card">
         <img src="${src}" alt="Carousel image" class="room-image">
+         <a href="#" class="btn btn-primary" onclick="deleteImage(${src})">Deletar</a>
       </div>
     `
     )
