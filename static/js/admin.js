@@ -396,27 +396,6 @@ function deleteService(serviceId) {
   refreshData();
 }
 
-document
-  .getElementById("service-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    addService(event);
-    showSubSection("service-grid");
-  });
-
-document
-  .getElementById("images-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault();
-    uploadImage("images");
-    const image_name =
-      document.getElementById("images-imageUpload").files[0].name;
-    const image = "/static/img/" + image_name;
-    carousselImages.push(image);
-    localStorage.setItem("images", JSON.stringify(carousselImages));
-    showSubSection("images-grid");
-  });
-
 function deleteImage(img_src) {
   // Filter out the room with the given ID
   carousselImages = carousselImages.filter((img) => img !== img_src);
@@ -436,3 +415,17 @@ function updateBookingStatus(bookingId, status) {
     refreshData();
   }
 }
+
+document
+  .getElementById("images-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    uploadImage("images");
+    const image_name =
+      document.getElementById("images-imageUpload").files[0].name;
+    const image = "/static/img/" + image_name;
+    carousselImages.push(image);
+    localStorage.setItem("images", JSON.stringify(carousselImages));
+    showSubSection("images-grid");
+    refreshData();
+  });

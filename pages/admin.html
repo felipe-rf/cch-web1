@@ -192,10 +192,10 @@
           <form id="images-form">
             <div class="form-group">
               <label for="images-imageUpload">Imagem</label>
-              <input type="file" id="images-imageUpload" class="btn btn-primary" accept="image/*" onchange="previewImage(event)"  >
+              <input type="file" id="images-imageUpload" class="btn btn-primary" accept="image/*" required>
             </div>
             <button type="reset" class="btn btn-primary" href="#" onclick="showSubSection('images-grid')">Cancelar</button>
-            <button type="submit" class="btn btn-primary" href="#">Confirmar</button>
+            <button type="submit" class="btn btn-primary">Confirmar</button>
           </form>
         </div>
         <div id="images-grid" class="sub-section" style="display: inline;">
