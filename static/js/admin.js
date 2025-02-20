@@ -1,10 +1,10 @@
 // Carregamento inicial
 window.onload = function () {
-  refreshData();
   // Verificar autenticação
   const adminToken = localStorage.getItem("adminToken");
   if (adminToken) {
     showAdminPanel();
+    refreshData();
     showSection();
   } else {
     window.location.href = "/admin/login";
@@ -42,6 +42,7 @@ function showSubSection(sectionId) {
     }
   }
 }
+
 function handleLogout() {
   localStorage.removeItem("adminToken");
   window.location.reload();
@@ -80,14 +81,14 @@ function refreshData() {
                    <p>${room.description}</p>
                    <p>Capacidade: ${room.capacity} pessoas</p>
                    <p>Preço: ${room.price} moedas de ouro/noite</p>
-                   <a href="#" class="btn btn-primary" onclick="deleteRoom(${room.id})">Deletar</a>;
+                   <a href="#" class="btn btn-primary" onclick="deleteRoom(${room.id})">Deletar</a>
                  </div>
                </div>
              `
     )
     .join("");
 
-  const serviceContainer = document.querySelector(".service-grid");
+  const serviceContainer = document.querySelector(".features-grid");
   serviceContainer.innerHTML = mockData.services
     .map(
       (service) => `
@@ -101,7 +102,7 @@ function refreshData() {
               </div>
               <h3>${service.name}</h3>
               <p>${service.description}</p>
-              <a href="#" class="btn btn-primary" onclick="deleteService(${service.id})">Deletar</a>;
+              <a href="#" class="btn btn-primary" onclick="deleteService(${service.id})">Deletar</a>
               </div>
           `
     )
@@ -188,8 +189,6 @@ function addService(event) {
     name,
     description,
     price,
-    capacity,
-    image,
   };
 
   // Add the new room to the rooms array
@@ -200,17 +199,9 @@ function addService(event) {
   refreshData();
 }
 
-document
-  .getElementById("service-form")
-  .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevents unwanted page refresh
-    addRoom(event);
-    showSubSection("service-grid");
-  });
-
-function deleteRoom(serviceId) {
+function deleteService(serviceId) {
   // Filter out the room with the given ID
-  mockData.rooms = mockData.services.filter(
+  mockData.services = mockData.services.filter(
     (service) => service.id !== serviceId
   );
 
@@ -220,3 +211,11 @@ function deleteRoom(serviceId) {
   // Re-render the room list
   refreshData();
 }
+
+document
+  .getElementById("service-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    addService(event);
+    showSubSection("service-grid");
+  });

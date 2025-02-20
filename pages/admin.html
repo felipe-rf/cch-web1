@@ -126,24 +126,24 @@
           <form id="service-form">
             <div class="form-group">
               <label for="name">Nome</label>
-              <input type="text" id="name" required>
-              <label for="desc">Descrição</label>
-              <input type="text" id="desc" required>
-              <label for="price">Preço</label>
-              <input type="number" id="price" min='1' required>
+              <input type="text" id="service-name" required>
+              <label for="service-name">Descrição</label>
+              <input type="text" id="service-desc" required>
+              <label for="service-price">Preço</label>
+              <input type="number" id="service-price" min='1' required>
             </div>
             <button type="reset" class="btn btn-primary" href="#" onclick="showSubSection('service-grid')">Cancelar</button>
             <button type="submit" class="btn btn-primary" href="#">Confirmar</button>
           </form>
         </div>
         <!-- Conteúdo de gerenciamento de quartos será carregado via JavaScript -->
-        <div id="service-grid" class="sub-section" style="display: grid;">
+        <div id="service-grid" class="sub-section" style="display: inline;">
           <div class="feature-card">
             <div class="feature-content">
               <button type="reset" class="btn btn-primary" href="#" onclick="showSubSection('create-service')">Novo Serviço</button>
             </div>
           </div>
-          <div class="service-grid">
+            <div class="features-grid">
           </div>
         </div>
       </div>    
