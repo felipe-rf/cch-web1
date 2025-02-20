@@ -157,6 +157,21 @@
           </form>
         </div>
 
+        <div id="edit-service" class="sub-section" style="display: none;">
+          <form id="edit-service-form">
+            <div class="form-group">
+              <label for="name">Nome</label>
+              <input type="text" id="edit-service-name" required>
+              <label for="service-name">Descrição</label>
+              <input type="text" id="edit-service-desc" required>
+              <label for="service-price">Preço</label>
+              <input type="number" id="edit-service-price" min='1' required>
+            </div>
+            <button type="reset" class="btn btn-primary" href="#" onclick="showSubSection('service-grid')">Cancelar</button>
+            <button type="submit" class="btn btn-primary" href="#">Confirmar</button>
+          </form>
+        </div>
+
         <div id="service-grid" class="sub-section" style="display: inline;">
           <div class="room-card">
             <div class="room-content">
