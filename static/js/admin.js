@@ -170,7 +170,6 @@ function addRoom(event) {
 
 function editRoom(event, roomId) {
   event.preventDefault();
-
   const name = document.getElementById("edit-name").value;
   const description = document.getElementById("edit-desc").value;
   const price = parseFloat(document.getElementById("edit-price").value);
@@ -201,17 +200,10 @@ function editRoom(event, roomId) {
   localStorage.setItem("roomsData", JSON.stringify(mockData));
 
   // Re-render the room list
-  refreshRooms();
+  refreshData();
 }
 
 function showEditRoom(roomId) {
-  event.preventDefault();
-
-  const name = document.getElementById("edit-name").value;
-  const description = document.getElementById("edit-desc").value;
-  const price = parseFloat(document.getElementById("edit-price").value);
-  const capacity = parseInt(document.getElementById("edit-capacity").value);
-
   // Find the room by ID
   const roomIndex = mockData.rooms.findIndex((room) => room.id === roomId);
   if (roomIndex === -1) {
@@ -220,16 +212,16 @@ function showEditRoom(roomId) {
   }
 
   // Update room properties
-  name = mockData.rooms[roomIndex].name;
-  description = mockData.rooms[roomIndex].description = description;
-  price = mockData.rooms[roomIndex].price = price;
-  capacity = mockData.rooms[roomIndex].capacity = capacity;
+  document.getElementById("edit-name").value = mockData.rooms[roomIndex].name;
+  document.getElementById("edit-desc").value =
+    mockData.rooms[roomIndex].description;
+  document.getElementById("edit-price").value = mockData.rooms[roomIndex].price;
+  document.getElementById("edit-capacity").value =
+    mockData.rooms[roomIndex].capacity;
 
-  // Save updated data
-  localStorage.setItem("roomsData", JSON.stringify(mockData));
-
-  // Re-render the room list
-  refreshRooms();
+  showSubSection("edit-room");
+  const form = document.getElementById("edit-room-form");
+  form.roomid = roomId;
 }
 
 document
@@ -245,7 +237,7 @@ document
   .getElementById("edit-room-form")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Prevents unwanted page refresh
-    addRoom(event);
+    editRoom(event, document.getElementById("edit-room-form").roomid);
     showSubSection("rooms-grid");
   });
 

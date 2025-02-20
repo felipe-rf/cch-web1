@@ -87,7 +87,7 @@
       <div id="manage-rooms" class="admin-section" style="display: none;">
         <h2>Gerenciar Aposentos</h2>
         <div id="create-room" class="sub-section" style="display: none;">
-          <form id="room-form">
+          <form id="create-room-form">
             <div class="form-group">
               <label for="name">Nome</label>
               <input type="text" id="name" required>
@@ -116,9 +116,9 @@
           <div class="rooms-grid">
           </div>
         </div>
-
+        
         <div id="edit-room" class="sub-section" style="display: none;">
-          <form id="room-form">
+          <form id="edit-room-form">
             <div class="form-group">
               <label for="edit-name">Nome</label>
               <input type="text" id="edit-name" required>
@@ -131,7 +131,7 @@
             </div>
             <div class="form-group">
               <label for="edit-imageUpload">Imagem</label>
-              <input type="file" id="edit-imageUpload" class="btn btn-primary" accept="image/*" onchange="previewImage(event)" required>
+              <input type="file" id="edit-imageUpload" class="btn btn-primary" accept="image/*" onchange="previewImage(event)"  >
             </div>
 
             <button type="reset" class="btn btn-primary" href="#" onclick="showSubSection('rooms-grid')">Cancelar</button>
@@ -156,7 +156,7 @@
             <button type="submit" class="btn btn-primary" href="#">Confirmar</button>
           </form>
         </div>
-        <!-- Conteúdo de gerenciamento de quartos será carregado via JavaScript -->
+
         <div id="service-grid" class="sub-section" style="display: inline;">
           <div class="rooms-card">
             <div class="feature-content">
