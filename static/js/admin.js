@@ -1,6 +1,4 @@
-// Carregamento inicial
 window.onload = function () {
-  // Verificar autenticação
   const adminToken = localStorage.getItem("adminToken");
   if (adminToken) {
     showAdminPanel();
@@ -24,18 +22,15 @@ function showAdminSection(sectionId) {
 }
 
 function showSubSection(sectionId) {
-  // Find the currently visible admin section
   const activeAdminSection = document.querySelector(
     ".admin-section[style*='inline']"
   );
 
   if (activeAdminSection) {
-    // Hide only the sub-sections within the active admin section
     activeAdminSection.querySelectorAll(".sub-section").forEach((section) => {
       section.style.display = "none";
     });
 
-    // Show the requested sub-section
     const targetSubSection = document.getElementById(sectionId);
     if (targetSubSection && activeAdminSection.contains(targetSubSection)) {
       targetSubSection.style.display = "inline";
@@ -49,7 +44,6 @@ function handleLogout() {
 }
 
 function refreshData() {
-  // Carregar dashboard administrativo
   const dashboard = document.getElementById("dashboard");
   dashboard.innerHTML = `
          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -122,7 +116,6 @@ function refreshData() {
     )
     .join("");
 
-  // Carregar gerenciamento de reservas
   const bookingsManager = document.getElementById("manage-bookings");
   bookingsManager.innerHTML = `
          <div class="overflow-x-auto">
@@ -195,7 +188,7 @@ function addRoom(event) {
   const image_name = document.getElementById("rooms-imageUpload").files[0].name;
   const image = "/static/img/" + image_name;
   const newRoom = {
-    id: mockData.rooms.length + 1, // Generate a new ID
+    id: mockData.rooms.length + 1, 
     name,
     description,
     price,
@@ -203,11 +196,9 @@ function addRoom(event) {
     image,
   };
 
-  // Add the new room to the rooms array
   mockData.rooms.push(newRoom);
   localStorage.setItem("roomsData", JSON.stringify(mockData));
 
-  // Re-render the room list
   refreshData();
 }
 
@@ -219,42 +210,35 @@ function editRoom(event, roomId) {
   const capacity = parseInt(document.getElementById("edit-capacity").value);
   const imageInput = document.getElementById("edit-imageUpload").files[0];
 
-  // Find the room by ID
   const roomIndex = mockData.rooms.findIndex((room) => room.id === roomId);
   if (roomIndex === -1) {
     alert("Room not found!");
     return;
   }
 
-  // Update room properties
   mockData.rooms[roomIndex].name = name;
   mockData.rooms[roomIndex].description = description;
   mockData.rooms[roomIndex].price = price;
   mockData.rooms[roomIndex].capacity = capacity;
 
-  // Only update image if a new one was uploaded
   if (imageInput) {
     const image_name = imageInput.name;
     mockData.rooms[roomIndex].image = "/static/img/" + image_name;
     uploadImage("edit");
   }
 
-  // Save updated data
   localStorage.setItem("roomsData", JSON.stringify(mockData));
 
-  // Re-render the room list
   refreshData();
 }
 
 function showEditRoom(roomId) {
-  // Find the room by ID
   const roomIndex = mockData.rooms.findIndex((room) => room.id === roomId);
   if (roomIndex === -1) {
     alert("Room not found!");
     return;
   }
 
-  // Update room properties
   document.getElementById("edit-name").value = mockData.rooms[roomIndex].name;
   document.getElementById("edit-desc").value =
     mockData.rooms[roomIndex].description;
@@ -270,7 +254,7 @@ function showEditRoom(roomId) {
 document
   .getElementById("create-room-form")
   .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevents unwanted page refresh
+    event.preventDefault(); 
     uploadImage("rooms");
     addRoom(event);
     showSubSection("rooms-grid");
@@ -279,23 +263,22 @@ document
 document
   .getElementById("edit-room-form")
   .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevents unwanted page refresh
+    event.preventDefault(); 
     editRoom(event, document.getElementById("edit-room-form").roomid);
     showSubSection("rooms-grid");
   });
 
 function deleteRoom(roomId) {
-  // Filter out the room with the given ID
+
   mockData.rooms = mockData.rooms.filter((room) => room.id !== roomId);
 
-  // Save the updated rooms data to localStorage
+  
   localStorage.setItem("roomsData", JSON.stringify(mockData));
 
-  // Re-render the room list
+ 
   refreshData();
 }
 
-// Service dashboard
 
 function addService(event) {
   event.preventDefault();
@@ -304,17 +287,17 @@ function addService(event) {
   const description = document.getElementById("service-desc").value;
   const price = parseFloat(document.getElementById("service-price").value);
   const newService = {
-    id: mockData.services.length + 1, // Generate a new ID
+    id: mockData.services.length + 1, 
     name,
     description,
     price,
   };
 
-  // Add the new room to the rooms array
+
   mockData.services.push(newService);
   localStorage.setItem("roomsData", JSON.stringify(mockData));
 
-  // Re-render the room list
+ 
   refreshData();
 }
 
@@ -324,7 +307,6 @@ function editService(event, serviceId) {
   const description = document.getElementById("edit-service-desc").value;
   const price = parseFloat(document.getElementById("edit-service-price").value);
 
-  // Find the room by ID
   const serviceIndex = mockData.services.findIndex(
     (service) => service.id === serviceId
   );
@@ -333,20 +315,16 @@ function editService(event, serviceId) {
     return;
   }
 
-  // Update room properties
   mockData.services[serviceIndex].name = name;
   mockData.services[serviceIndex].description = description;
   mockData.services[serviceIndex].price = price;
 
-  // Save updated data
   localStorage.setItem("serviceData", JSON.stringify(mockData));
 
-  // Re-render the room list
   refreshData();
 }
 
 function showEditService(serviceId) {
-  // Find the room by ID
   const serviceIndex = mockData.services.findIndex(
     (service) => service.id === serviceId
   );
@@ -355,7 +333,6 @@ function showEditService(serviceId) {
     return;
   }
 
-  // Update room properties
   document.getElementById("edit-service-name").value =
     mockData.services[serviceIndex].name;
   document.getElementById("edit-service-desc").value =
@@ -370,7 +347,7 @@ function showEditService(serviceId) {
 document
   .getElementById("create-service-form")
   .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevents unwanted page refresh
+    event.preventDefault(); 
     addService(event);
     showSubSection("service-grid");
   });
@@ -378,32 +355,32 @@ document
 document
   .getElementById("edit-service-form")
   .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevents unwanted page refresh
+    event.preventDefault(); 
     editService(event, document.getElementById("edit-service-form").serviceid);
     showSubSection("service-grid");
   });
 
 function deleteService(serviceId) {
-  // Filter out the room with the given ID
+
   mockData.services = mockData.services.filter(
     (service) => service.id !== serviceId
   );
 
-  // Save the updated rooms data to localStorage
+
   localStorage.setItem("roomsData", JSON.stringify(mockData));
 
-  // Re-render the room list
+  
   refreshData();
 }
 
 function deleteImage(img_src) {
-  // Filter out the room with the given ID
+  
   carousselImages = carousselImages.filter((img) => img !== img_src);
 
-  // Save the updated rooms data to localStorage
+  
   localStorage.setItem("images", JSON.stringify(carousselImages));
 
-  // Re-render the room list
+
   refreshData();
 }
 

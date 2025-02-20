@@ -1,6 +1,4 @@
-// script.js
 function loadMockData() {
-  // Carregar serviços
   const servicesContainer = document.querySelector("#services .features-grid");
   servicesContainer.innerHTML = mockData.services
     .map(
@@ -21,7 +19,7 @@ function loadMockData() {
     )
     .join("");
 
-  // Load services, dashboard, etc. (similar to how you did it before)
+  
 }
 
 window.onload = function () {

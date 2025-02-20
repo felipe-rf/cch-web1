@@ -21,27 +21,21 @@ class CustomHandler(SimpleHTTPRequestHandler):
                 self.send_error(400, "Invalid Content-Type")
                 return
 
-            # Extrai o boundary do Content-Type
             boundary = content_type.split("boundary=")[-1].encode()
             content_length = int(self.headers["Content-Length"])
             body = self.rfile.read(content_length)
 
-            # Divide as partes do multipart usando o boundary
             parts = body.split(b'--' + boundary)
 
             for part in parts:
                 if b'Content-Disposition' in part and b'filename=' in part:
-                    # Extrai o nome do arquivo usando regex
                     match = re.search(r'filename="([^"]+)"', part.decode(errors='ignore'))
                     filename = match.group(1) if match else f"{uuid.uuid4().hex}.jpg"
 
-                    # Extrai o conteúdo do arquivo (ignorando headers)
                     file_data = part.split(b'\r\n\r\n', 1)[-1].rstrip(b'--')
 
-                    # Garante que o diretório de upload existe
                     os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-                    # Evita sobrescrita de arquivos
                     file_path = os.path.join(UPLOAD_DIR, filename)
                     counter = 1
                     while os.path.exists(file_path):
@@ -49,7 +43,6 @@ class CustomHandler(SimpleHTTPRequestHandler):
                         file_path = os.path.join(UPLOAD_DIR, f"{name}_{counter}{ext}")
                         counter += 1
 
-                    # Salva o arquivo
                     with open(file_path, "wb") as f:
                         f.write(file_data)
 

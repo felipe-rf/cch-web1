@@ -1,4 +1,3 @@
-// Funções de navegação
 function showSection(sectionId) {
   document.querySelectorAll(".section").forEach((section) => {
     section.style.display = "none";
@@ -6,11 +5,8 @@ function showSection(sectionId) {
   document.getElementById(sectionId).style.display = "block";
 }
 
-// Funções de reserva
 
-// Carregamento inicial
 window.onload = function () {
-  // Verificar autenticação
   const adminToken = localStorage.getItem("adminToken");
   if (window.location.hash === "#admin") {
     if (adminToken) {
@@ -22,15 +18,13 @@ window.onload = function () {
     }
   }
 
-  // Carregar dados mockados
   loadMockData();
 };
 
 function loadMockData() {
-  //Carregar quartos
   const roomsContainer = document.querySelector(".rooms-grid");
   roomsContainer.innerHTML = mockData.rooms
-    .slice(0, 3) // Slice to get the first 3 rooms
+    .slice(0, 3) 
     .map(
       (room) => `
         <div class="room-card">
@@ -49,7 +43,7 @@ function loadMockData() {
 document.addEventListener("DOMContentLoaded", () => {
   const carouselContainer = document.querySelector(".carousel-container");
 
-  // Generate slides
+  
   carousselImages.forEach((imageUrl, index) => {
     const slide = document.createElement("div");
     slide.className = `carousel-slide ${index === 0 ? "active" : ""}`;
@@ -73,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentSlide = 0;
   let slideInterval;
 
-  // Create dots
   slides.forEach((_, index) => {
     const dot = document.createElement("div");
     dot.classList.add("dot");
@@ -113,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     slideInterval = setInterval(nextSlide, 5000);
   }
 
-  // Event listeners
+  
   prevBtn.addEventListener("click", () => {
     prevSlide();
     resetInterval();
@@ -124,10 +117,10 @@ document.addEventListener("DOMContentLoaded", () => {
     resetInterval();
   });
 
-  // Start automatic slideshow
+  
   slideInterval = setInterval(nextSlide, 5000);
 
-  // Pause slideshow on hover
+ 
   const carousel = document.querySelector(".hero-carousel");
   carousel.addEventListener("mouseenter", () => clearInterval(slideInterval));
   carousel.addEventListener("mouseleave", () => {

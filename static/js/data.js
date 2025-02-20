@@ -1,4 +1,3 @@
-// Dados mockados
 const storedData = localStorage.getItem("roomsData");
 const mockData = storedData
   ? JSON.parse(storedData)

@@ -5,7 +5,7 @@ function handleBooking(event) {
   const roomType = document.getElementById("room-type").value;
   const guests = document.getElementById("guests").value;
 
-  // Simulando salvamento da reserva
+  
   const booking = {
     id: Date.now(),
     checkin,

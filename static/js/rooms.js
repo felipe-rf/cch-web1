@@ -1,6 +1,4 @@
-// script.js
 function loadMockData() {
-  // Load rooms
   const roomsContainer = document.querySelector("#rooms .rooms-grid");
   roomsContainer.innerHTML = mockData.rooms
     .map(
@@ -19,7 +17,7 @@ function loadMockData() {
     )
     .join("");
 
-  // Load services, dashboard, etc. (similar to how you did it before)
+  
 }
 
 window.onload = function () {
