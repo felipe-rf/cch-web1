@@ -253,6 +253,8 @@ function deleteRoom(roomId) {
   refreshData();
 }
 
+
+
 // Service dashboard
 
 function addService(event) {
@@ -275,6 +277,70 @@ function addService(event) {
   // Re-render the room list
   refreshData();
 }
+
+function editService(event, serviceId) {
+  event.preventDefault();
+  const name = document.getElementById("service-name").value;
+  const description = document.getElementById("service-desc").value;
+  const price = parseFloat(document.getElementById("service-price").value);
+
+
+  // Find the room by ID
+  const serviceIndex = mockData.service.findIndex((service) => service.id === serviceId);
+  if (serviceIndex === -1) {
+    alert("Service not found!");
+    return;
+  }
+
+  // Update room properties
+  mockData.service[serviceIndex].name = name;
+  mockData.service[serviceIndex].description = description;
+  mockData.service[serviceIndex].price = price;
+ 
+
+  // Save updated data
+  localStorage.setItem("serviceData", JSON.stringify(mockData));
+
+  // Re-render the room list
+  refreshData();
+}
+
+function showEditService(serviceId) {
+  // Find the room by ID
+  const serviceIndex = mockData.service.findIndex((service) => service.id === serviceId);
+  if (serviceIndex === -1) {
+    alert("Service not found!");
+    return;
+  }
+
+  // Update room properties
+  document.getElementById("edit-service-name").value = mockData.service[serviceIndex].name;
+  document.getElementById("edit-service-desc").value =
+    mockData.service[serviceIndex].description;
+  document.getElementById("edit-service-price").value = mockData.service[service].price;
+  showSubSection("edit-service");
+  const form = document.getElementById("edit-service-form");
+  form.serviceid = serviceId;
+}
+
+document
+  .getElementById("create-service-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevents unwanted page refresh
+    uploadImage();
+    addService(event);
+    showSubSection("service-grid");
+  });
+
+document
+  .getElementById("edit-service-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevents unwanted page refresh
+    editService(event, document.getElementById("edit-service-form").serviceid);
+    showSubSection("service-grid");
+  });
+
+
 
 function deleteService(serviceId) {
   // Filter out the room with the given ID
