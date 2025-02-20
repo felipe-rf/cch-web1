@@ -107,6 +107,20 @@ function refreshData() {
           `
     )
     .join("");
+
+
+    const removeImage = document.querySelector(".images-grid");
+  roomsContainer.innerHTML = mockData.carousselImages
+    .map(
+      (image) => `
+               <div class="room-card">
+                 <img src="${image}" class="room-image">
+
+                 </div>
+               </div>
+             `
+    )
+    .join("");
 }
 
 function uploadImage() {
