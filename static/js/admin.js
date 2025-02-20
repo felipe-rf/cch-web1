@@ -109,17 +109,14 @@ function refreshData() {
     )
     .join("");
 
-
-    const removeImage = document.querySelector(".images-grid");
-  roomsContainer.innerHTML = mockData.carousselImages
+  const imageContainer = document.querySelector(".images-grid");
+  imageContainer.innerHTML = carousselImages
     .map(
-      (image) => `
-               <div class="room-card">
-                 <img src="${image}" class="room-image">
-
-                 </div>
-               </div>
-             `
+      (src) => `
+      <div class="room-card">
+        <img src="${src}" alt="Carousel image" class="room-image">
+      </div>
+    `
     )
     .join("");
 }
