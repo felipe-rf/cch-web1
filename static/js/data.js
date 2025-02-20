@@ -55,7 +55,7 @@ const mockData = storedData
       bookings: [],
     };
 
-var carouselImages = [
+var carousselImages = [
   "/static/img/hero1.png",
   "/static/img/hero2.png",
   "/static/img/hero3.jpg",

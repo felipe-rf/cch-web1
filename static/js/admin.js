@@ -156,11 +156,57 @@ function addRoom(event) {
   refreshData();
 }
 
+function editRoom(event, roomId) {
+  event.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const description = document.getElementById("desc").value;
+  const price = parseFloat(document.getElementById("price").value);
+  const capacity = parseInt(document.getElementById("capacity").value);
+  const imageInput = document.getElementById("imageUpload").files[0];
+
+  // Find the room by ID
+  const roomIndex = mockData.rooms.findIndex((room) => room.id === roomId);
+  if (roomIndex === -1) {
+    alert("Room not found!");
+    return;
+  }
+
+  // Update room properties
+  mockData.rooms[roomIndex].name = name;
+  mockData.rooms[roomIndex].description = description;
+  mockData.rooms[roomIndex].price = price;
+  mockData.rooms[roomIndex].capacity = capacity;
+
+  // Only update image if a new one was uploaded
+  if (imageInput) {
+    const image_name = imageInput.name;
+    mockData.rooms[roomIndex].image = "/static/img/" + image_name;
+    uploadImage();
+  }
+
+  // Save updated data
+  localStorage.setItem("roomsData", JSON.stringify(mockData));
+
+  // Re-render the room list
+  refreshRooms();
+}
+
+function showEditRoom(roomId) {}
+
 document
-  .getElementById("room-form")
+  .getElementById("create-room-form")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Prevents unwanted page refresh
     uploadImage();
+    addRoom(event);
+    showSubSection("rooms-grid");
+  });
+
+document
+  .getElementById("edit-room-form")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevents unwanted page refresh
     addRoom(event);
     showSubSection("rooms-grid");
   });

@@ -119,6 +119,31 @@
           <div class="rooms-grid">
           </div>
         </div>
+
+        <div id="edit-room" class="sub-section" style="display: none;">
+          <form id="room-form">
+            <div class="form-group">
+              <label for="name">Nome</label>
+              <input type="text" id="name" required>
+              <label for="desc">Descrição</label>
+              <input type="text" id="desc" required>
+              <label for="capacity">Capacidade</label>
+              <input type="number" id="capacity" min='1' required>
+              <label for="price">Preço</label>
+              <input type="number" id="price" min='1' required>
+            </div>
+            <div class="form-group">
+              <label for="imageUpload">Imagem</label>
+              <input type="file" id="imageUpload" class="btn btn-primary" accept="image/*" onchange="previewImage(event)" required>
+            <!-- Image Preview -->
+            <img id="imagePreview" class="image-preview" alt="Image Preview">
+            </div>
+
+            <button type="reset" class="btn btn-primary" href="#" onclick="showSubSection('rooms-grid')">Cancelar</button>
+            <button type="submit" class="btn btn-primary" href="#">Confirmar</button>
+          </form>
+        </div>
+
       </div>
       <div id="manage-services" class="admin-section" style="display: none;">
         <h2>Gerenciar Serviços</h2>
@@ -138,7 +163,7 @@
         </div>
         <!-- Conteúdo de gerenciamento de quartos será carregado via JavaScript -->
         <div id="service-grid" class="sub-section" style="display: inline;">
-          <div class="feature-card">
+          <div class="rooms-card">
             <div class="feature-content">
               <button type="reset" class="btn btn-primary" href="#" onclick="showSubSection('create-service')">Novo Serviço</button>
             </div>
