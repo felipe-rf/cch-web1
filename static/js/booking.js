@@ -15,6 +15,12 @@ function handleBooking(event) {
     status: "pending",
   };
 
+  if (checkin == checkout){
+    alert(
+      "Data não pode ser igual."
+    )
+    return
+  }
   mockData.bookings.push(booking);
   localStorage.setItem("roomsData", JSON.stringify(mockData));
 
@@ -23,3 +29,16 @@ function handleBooking(event) {
   );
   event.target.reset();
 }
+
+function refreshData(){
+  const roomsContainer = document.querySelector("#room-type");
+  roomsContainer.innerHTML = mockData.rooms
+    .map(
+      (room) => `
+              <option value="${room.name}">${room.name}</option>
+             `
+    )
+    .join("");
+}
+
+window.onload=refreshData();
