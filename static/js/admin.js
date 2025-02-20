@@ -81,6 +81,7 @@ function refreshData() {
                    <p>${room.description}</p>
                    <p>Capacidade: ${room.capacity} pessoas</p>
                    <p>Preço: ${room.price} moedas de ouro/noite</p>
+                   <a href="#" class="btn btn-primary" onclick="showEditRoom(${room.id})">Editar</a>
                    <a href="#" class="btn btn-primary" onclick="deleteRoom(${room.id})">Deletar</a>
                  </div>
                </div>
@@ -159,11 +160,11 @@ function addRoom(event) {
 function editRoom(event, roomId) {
   event.preventDefault();
 
-  const name = document.getElementById("name").value;
-  const description = document.getElementById("desc").value;
-  const price = parseFloat(document.getElementById("price").value);
-  const capacity = parseInt(document.getElementById("capacity").value);
-  const imageInput = document.getElementById("imageUpload").files[0];
+  const name = document.getElementById("edit-name").value;
+  const description = document.getElementById("edit-desc").value;
+  const price = parseFloat(document.getElementById("edit-price").value);
+  const capacity = parseInt(document.getElementById("edit-capacity").value);
+  const imageInput = document.getElementById("edit-imageUpload").files[0];
 
   // Find the room by ID
   const roomIndex = mockData.rooms.findIndex((room) => room.id === roomId);
@@ -192,7 +193,33 @@ function editRoom(event, roomId) {
   refreshRooms();
 }
 
-function showEditRoom(roomId) {}
+function showEditRoom(roomId) {
+  event.preventDefault();
+
+  const name = document.getElementById("edit-name").value;
+  const description = document.getElementById("edit-desc").value;
+  const price = parseFloat(document.getElementById("edit-price").value);
+  const capacity = parseInt(document.getElementById("edit-capacity").value);
+
+  // Find the room by ID
+  const roomIndex = mockData.rooms.findIndex((room) => room.id === roomId);
+  if (roomIndex === -1) {
+    alert("Room not found!");
+    return;
+  }
+
+  // Update room properties
+  name = mockData.rooms[roomIndex].name;
+  description = mockData.rooms[roomIndex].description = description;
+  price = mockData.rooms[roomIndex].price = price;
+  capacity = mockData.rooms[roomIndex].capacity = capacity;
+
+  // Save updated data
+  localStorage.setItem("roomsData", JSON.stringify(mockData));
+
+  // Re-render the room list
+  refreshRooms();
+}
 
 document
   .getElementById("create-room-form")
